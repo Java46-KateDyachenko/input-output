@@ -1,4 +1,4 @@
-package telren.io;
+package telran.io;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,6 +7,7 @@ import java.io.*;
 
 class FileTests {
 File file; 
+int depth=0;
 
 @BeforeEach
 void setUp() {
@@ -21,7 +22,7 @@ void setUp() {
 	}
 	@Test
 	void printDirectoryContent() {
-		printDirectory("C:\\1",2);
+		printDirectory("C:\\1",3);
 	}
 	
 	/**
@@ -45,18 +46,20 @@ void setUp() {
 		 */
 		//final String freeSpace = freeSpaceCount(level, "  ");
      	File dir = new File(pathName);
-     	printDir(dir);
+     	depth=level;
+     	printDir(dir,0);
     	
 	}
 	
-	private void printDir(File dir) {
-		
+	private void printDir(File dir,int level) {
 		if (dir.isDirectory()){
 			for (File file: dir.listFiles()) {
 				if (file.isDirectory()) {
 					System.out.println(freeSpaceCount(file.getParent().length())+ file.getName()+"=dir");
-		            printDir(file);
-		           
+					level++;
+				    if (level<=depth) {	
+					printDir(file,level);
+				    }
 				}
 				if (file.isFile()) {
 					System.out.println(freeSpaceCount(file.getParent().length())+file.getName()+"=file");
