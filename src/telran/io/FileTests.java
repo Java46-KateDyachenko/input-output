@@ -22,7 +22,7 @@ void setUp() {
 	}
 	@Test
 	void printDirectoryContent() {
-		printDirectory("C:\\1",3);
+		printDirectory("C:\\1",-1);
 	}
 	
 	/**
@@ -43,10 +43,12 @@ void setUp() {
 		      <file> type=file
 		      <dir> type =dir
 		   
-		 */
-		//final String freeSpace = freeSpaceCount(level, "  ");
+*/
      	File dir = new File(pathName);
-     	depth=level;
+     	
+     	if (level==-1) {depth=1000;}
+     	else {
+     	depth=level;}
      	printDir(dir,0);
     	
 	}
